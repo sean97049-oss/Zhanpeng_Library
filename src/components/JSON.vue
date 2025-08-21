@@ -114,7 +114,7 @@
     </section>
   </div>
 </template>
-
+git push -u origin main
 <script setup>
 import { ref, computed } from "vue"
 import authors from "../assets/json/authors.json";

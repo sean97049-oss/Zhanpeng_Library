@@ -1,10 +1,11 @@
 <script setup>
 import JAONLab from './components/JSON.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import Form from './components/Form.vue'
+import TheWelcome from './components/TheWelcome.vue';
 </script>
 
 <template>
-  <JAONLab />
+  <Form />
 </template>
 
 <style scoped>
