@@ -17,14 +17,6 @@
                 @input="() => validatePassword(false)" v-model="formData.password">
               <div v-if="errors.password" class="text-danger">{{ errors.password }}</div>
             </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <div class="form-check">
-                <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian">
-                <label class="form-check-label" for="isAustralian">Australian Resident?</label>
-              </div>
-            </div>
             <div class="col-md-6">
               <label for="gender" class="form-label">Gender</label>
               <select class="form-select" id="gender" v-model="formData.gender">
@@ -33,10 +25,32 @@
                 <option value="other">Other</option>
               </select>
             </div>
+            <div class="col-md-6 col-sm-6">
+              <label for="confirm-password" class="form-label">Confirm password</label>
+              <input type="password" class="form-control" id="confirm-password" v-model="formData.confirmPassword"
+                @blur="() => validateConfirmPassword(true)" />
+              <div v-if="errors.confirmPassword" class="text-danger">
+                {{ errors.confirmPassword }}
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="isAustralian" v-model="formData.isAustralian">
+                <label class="form-check-label" for="isAustralian">Australian Resident?</label>
+              </div>
+            </div>
+
           </div>
           <div class="mb-3">
             <label for="reason" class="form-label">Reason for joining</label>
             <textarea class="form-control" id="reason" rows="3" v-model="formData.reason"></textarea>
+          </div>
+          <div class="mb-3">
+            <label for="reason" class="form-label">Suburb</label>
+            <input type="text" class="form-control" id="suburb" v-bind:value="formData.suburb" />
           </div>
           <div class="text-center">
             <button type="submit" class="btn btn-primary me-2">Submit</button>
@@ -66,14 +80,17 @@ import { ref } from 'vue';
 const formData = ref({
   username: '',
   password: '',
+  confirmPassword: '',
   isAustralian: false,
   reason: '',
-  gender: ''
-});
+  gender: '',
+  suburb: 'Clayton'
+})
 
 const errors = ref({
   username: null,
   password: null,
+  confirmPassword: null,
   resident: null,
   gender: null,
   reason: null,
@@ -112,6 +129,14 @@ const validatePassword = (blur) => {
   }
 };
 
+const validateConfirmPassword = (blur) => {
+  if (formData.value.password !== formData.value.confirmPassword) {
+    if (blur) errors.value.confirmPassword = 'Passwords do not match.'
+  } else {
+    errors.value.confirmPassword = null
+  }
+}
+
 const submitForm = () => {
   validateName(true);
   validatePassword(true);
@@ -129,7 +154,8 @@ const clearForm = () => {
     password: '',
     isAustralian: false,
     reason: '',
-    gender: ''
+    gender: '',
+    suburb: ''
   };
 
   errors.value = {

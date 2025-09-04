@@ -1,11 +1,19 @@
 <script setup>
+import Header from './components/Header.vue'
 import JAONLab from './components/JSON.vue'
 import Form from './components/Form.vue'
 import TheWelcome from './components/TheWelcome.vue';
 </script>
 
 <template>
-  <Form />
+  <div class="main-container">
+    <header>
+      <Header />
+    </header>
+    <main class="main-box">
+      <router-view></router-view>
+    </main>
+  </div>
 </template>
 
 <style scoped>

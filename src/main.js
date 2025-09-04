@@ -9,8 +9,11 @@ import PrimeVue from 'primeVue/config'
 import DataTable from 'primevue/datatable'
 import Column from 'primevue/column'
 
+import router from './components/router'
+
 const app = createApp(App)
 app.use(PrimeVue)
+app.use(router)
 // app.use(PrimeVue, { theme: { preset: Aura } }) // 如果主题无效可注释
 
 app.component('DataTable', DataTable)
